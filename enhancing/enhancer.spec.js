@@ -1,7 +1,7 @@
 const enhancer = require('./enhancer.js');
 // test away!
 
-describe('the enchancer', () => {
+describe('the enhancer', () => {
 
     describe('the repair function', () => {
 
@@ -75,5 +75,35 @@ describe('the enchancer', () => {
 
             expect(failedHammer).not.toBe(battleHammer);
         });
-    })
-})
+
+        it('should decrease durability by 5 if the item enhancement is less than 15', () => {
+            const battleJavelin = {
+                name: 'Battle Javelin',
+                durability: 100,
+                enhancement: 14
+            }
+            const failedJavelin = enhancer.fail(battleJavelin);
+            expect(failedJavelin.durability).toBe(battleJavelin.durability - 5);
+        });
+
+        it('should decrease durability by 10 if the item enhancement is 15 or more', () => {
+            const battleShip = {
+                name: 'Battle Ship',
+                durability: 100,
+                enhancement: 17
+            }
+            const failedBattleShip = enhancer.fail(battleShip);
+            expect(failedBattleShip.durability).toBe(battleShip.durability - 10);
+        });
+
+        it('should decrease enhancement by 1 if enhancement is greater than 16', () => {
+            const finisher = {
+                name: 'The Finisher',
+                durability: 100,
+                enhancement: 17
+            }
+            const failedFinisher = enhancer.fail(finisher);
+            expect(failedFinisher.enhancement).toBe(finisher.enhancement - 1);
+        });
+    });
+});

@@ -16,6 +16,16 @@ function fail(item) {
         ...item
     };
 
+    if(item.enhancement < 15) {
+      failedItem.durability = (failedItem.durability - 5);
+    } else {
+      failedItem.durability = (failedItem.durability - 10)
+    };
+
+    if(item.enhancement > 16) {
+      failedItem.enhancement = (failedItem.enhancement - 1);
+    };
+
     return failedItem;
 }
 
